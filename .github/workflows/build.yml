@@ -11,6 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Extract project from zip
+        run: |
+          unzip -o dual-cam-simple-main.zip
+          # Move contents to root if nested
+          if [ -d dual-cam-simple-main ]; then
+            cp -a dual-cam-simple-main/. .
+            rm -rf dual-cam-simple-main
+          fi
+          ls -la
+
       - uses: actions/setup-java@v4
         with:
           java-version: "17"
